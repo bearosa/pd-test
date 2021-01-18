@@ -1,0 +1,21 @@
+.avatar {
+  position: relative;
+  border: 2px solid rgba(var(--border-color), 0.4);
+  border-radius: 100%;
+  text-align: center;
+  font-weight: 600;
+  color: #317ae2;
+  &.noPhoto {
+    background: rgba(49, 122, 226, 0.16);
+  }
+
+  .logo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 100%;
+    opacity: 1;
+  }
+}

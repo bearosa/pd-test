@@ -1,0 +1,25 @@
+.app {
+  height: 100vh;
+
+  .appHeader {
+    padding: 0 16px;
+    background-color: var(--dark-background-color);
+    height: 60px;
+    display: flex;
+    align-items: center;
+
+    .appLogo {
+      height: 32px;
+    }
+  }
+
+  .title {
+    padding: 24px 16px;
+    margin: 0;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .list {
+    padding: 16px;
+  }
+}
