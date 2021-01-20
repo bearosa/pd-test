@@ -10,7 +10,7 @@ import Modal from "components/Modal";
 
 import st from "./list-element.module.scss";
 
-const ListElement = ({person, index, className}) => {
+const ListElement = ({person, index, refetch, className}) => {
   const assistant = "bff2c8b4ca9b3591be6f56b61108531ffcdb4a61";
   const groups = "b0cc020463afa8d79510c0f9c577b85163ce4a55";
 
@@ -76,7 +76,7 @@ const ListElement = ({person, index, className}) => {
       setShowInfoModal(true);
     }
     const handleOnDelete = () => {
-      api().deletePerson({id: person.id})
+      api().deletePerson({id: person.id}).then(() => refetch())
     }
     return (
       <>
@@ -96,6 +96,7 @@ const ListElement = ({person, index, className}) => {
       <Draggable draggableId={person.id.toString()} index={index}>
         {provided => (
           <div 
+            data-testid="list-element"
             className={cls(className, st.element)} 
             ref={provided.innerRef}
             {...provided.draggableProps}
@@ -136,12 +137,16 @@ const ListElement = ({person, index, className}) => {
 }
 
 ListElement.defaultProps = { 
-  className: undefined 
+  className: undefined,
+  refetch: () => {}, 
+  index: 0,
 };
 
 ListElement.propTypes = {
   person: PropTypes.object.isRequired,
+  index: PropTypes.number,
   className: PropTypes.string,
+  refetch: PropTypes.func,
 };
 
 export default ListElement;

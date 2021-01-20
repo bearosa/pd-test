@@ -9,7 +9,7 @@ const Avatar = ({className, pictures, firstName, lastName, ...props}) => {
       {!!pictures ? 
           <picture>
             <source media="(min-width: 512px)" srcSet={pictures[512]} />
-            <img className={st.logo} src={pictures[128]} alt="" />
+            <img className={st.logo} src={pictures[128]} alt={firstName} />
           </picture>
         : 
           `${firstName?.trim().charAt(0).toUpperCase()}${lastName ? lastName.trim().charAt(0).toUpperCase() : ""}`

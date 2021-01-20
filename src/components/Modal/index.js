@@ -29,14 +29,18 @@ const Modal = ({className, children, show, onClose, title, actions}) => {
 
 Modal.defaultProps = {
   className: undefined,
+  children: <></>,
+  show: false,
+  onClose: () => {},
+  title: undefined,
 };
 
 Modal.propTypes = {
   className: PropTypes.string,
-  children: PropTypes.node.isRequired,
-  show: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired,
-  title: PropTypes.string.isRequired
+  children: PropTypes.node,
+  show: PropTypes.bool,
+  onClose: PropTypes.func,
+  title: PropTypes.string
 };
 
 export default Modal;

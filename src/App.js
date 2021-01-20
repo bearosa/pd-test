@@ -12,10 +12,9 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [people, setPeople] = useState([]);
 
-  const fetchPeople = (start) => {
-    console.log(start)
+  const fetchPeople = () => {
     setLoading(true);
-    api().getPersonsList({limit, start}).then(({data, additional_data}) =>{
+    api().getPersonsList({limit}).then(({data}) =>{
       setLoading(false);
       setPeople([...data]);
     })
@@ -35,7 +34,7 @@ function App() {
         {loading ?
           <Loading />
         :
-          <PeopleList people={people} setPeople={setPeople} className={st.list} />
+          <PeopleList people={people} setPeople={setPeople} refetch={fetchPeople} className={st.list} />
         }
       </div>
     </div>

@@ -9,7 +9,7 @@ import Modal from "components/Modal";
 import ListElement from "./ListElement";
 import st from "./people-list.module.scss";
 
-const PeopleList = ({people, setPeople, className}) => {
+const PeopleList = ({people, setPeople, refetch, className}) => {
   const [showAddModal, setShowAddModal] = useState(false);
 
   const modalActions = () => {
@@ -52,19 +52,23 @@ const PeopleList = ({people, setPeople, className}) => {
       <button className={st.addButton} onClick={()=>setShowAddModal(true)}>
         <img className={st.icon} src={add} alt="add person" />
         Add person
-        </button>
+      </button>
+      {people.length > 0 ? 
         <DragDropContext onDragEnd={onDragEnd}>
           <Droppable droppableId="list">
             {provided => (
               <div className={st.listContainer} ref={provided.innerRef} {...provided.droppableProps}>
                 {
-                  people.map((el, index) => <ListElement person={el} className={st.element} index={index} key={el.id} />)
+                  people.map((el, index) => <ListElement person={el} className={st.element} refetch={refetch} index={index} key={el.id} />)
                 }
                 {provided.placeholder}
               </div>
             )}
           </Droppable>
-        </DragDropContext>
+        </DragDropContext> 
+      : 
+        <div className={st.emptyState}>No people found</div>
+      }
       <Modal show={showAddModal} onClose={()=>setShowAddModal(false)} title="Add Person" actions={modalActions()}>test</Modal>
     </div>
   )
@@ -73,12 +77,14 @@ const PeopleList = ({people, setPeople, className}) => {
 PeopleList.defaultProps = { 
   people: [], 
   setPeople: () => {},
+  refetch: () => {},
   className: undefined 
 };
 
 PeopleList.propTypes = {
   people: PropTypes.array,
   setPeople: PropTypes.func,
+  refetch: PropTypes.func,
   className: PropTypes.string,
 };
 
