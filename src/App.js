@@ -3,32 +3,26 @@ import React, { useEffect, useState } from "react";
 import api from "api";
 import logo from 'assets/pipedrive-logo.svg';
 import PeopleList from "components/PeopleList";
+import Loading from "components/Loading";
 
 import st from './app.module.scss';
 
 function App() {
+  const limit = 1000;
   const [loading, setLoading] = useState(false);
   const [people, setPeople] = useState([]);
-  const [start, setStart] = useState(0);
 
-  // const fetchTransactions = () => {
-  //   setLoading(true);
-  //   console.log(start);
-  //   api.getTransactionList({start}).then(tr =>{
-  //     setLoading(false);
-  //     setTransactions([...transactions, ...tr.items]);
-  //     setStart(tr.last);
-  //   })
-  // }
+  const fetchPeople = (start) => {
+    console.log(start)
+    setLoading(true);
+    api().getPersonsList({limit, start}).then(({data, additional_data}) =>{
+      setLoading(false);
+      setPeople([...data]);
+    })
+  }
 
   useEffect(() => {
-    setLoading(true);
-    api().getPersonsList({}).then(pr => {
-      console.log(pr);
-      setLoading(false);
-      setPeople([...pr.data]);
-      setStart(pr.next_start);
-    })
+    fetchPeople();
   }, [])
 
   return (
@@ -37,7 +31,13 @@ function App() {
         <img src={logo} className={st.appLogo} alt="logo" />
       </header>
       <h3 className={st.title}>People's List</h3>
-      <PeopleList people={people} className={st.list} />
+      <div className={st.listContainer}>
+        {loading ?
+          <Loading />
+        :
+          <PeopleList people={people} setPeople={setPeople} className={st.list} />
+        }
+      </div>
     </div>
   );
 }

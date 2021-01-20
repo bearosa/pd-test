@@ -19,7 +19,17 @@
     border-bottom: 1px solid var(--border-color);
   }
 
-  .list {
+  .listContainer {
     padding: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .list {
+      width: 100%;
+      height: calc(
+        100vh - 60px - 74px - 32px
+      ); /* app height - header height - title height - listContainer padding */
+    }
   }
 }
