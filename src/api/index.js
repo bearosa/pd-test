@@ -31,7 +31,7 @@ const api = () => {
 
     try {
       let response = await fetch(
-        `${endpoint}${path}&api_token=${token}`,
+        `${endpoint}${path}?api_token=${token}`,
         {
           method: 'POST',
           headers: getHeader(),
@@ -49,7 +49,7 @@ const api = () => {
 
     try {
       let response = await fetch(
-        `${endpoint}${path}&api_token=${token}`,
+        `${endpoint}${path}?api_token=${token}`,
         {
           method: 'DELETE',
           headers: getHeader()

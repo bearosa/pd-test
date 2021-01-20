@@ -2,6 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  background-color: var(--light-background-color);
   border: 1px solid var(--border-color);
   padding: 8px 16px;
 
@@ -10,6 +11,11 @@
       font-weight: 600;
       font-size: 18px;
       margin: 0;
+
+      &:hover {
+        text-decoration: underline;
+        cursor: pointer;
+      }
     }
 
     .organization {
@@ -30,5 +36,64 @@
     width: 40px;
     line-height: 40px;
     font-size: 14px;
+    cursor: pointer;
   }
+}
+
+.modalContent {
+  padding: 16px;
+  .modalAvatar {
+    height: 100px;
+    width: 100px;
+    line-height: 100px;
+    font-size: 40px;
+    margin: 0 auto;
+  }
+
+  .name,
+  .phone {
+    font-weight: bold;
+    text-align: center;
+    margin: 8px 0;
+  }
+
+  .phone {
+    color: var(--add-color);
+  }
+
+  .additionalInfo {
+    border-top: 1px solid var(--border-color);
+    padding: 16px;
+    display: grid;
+    grid-template-columns: auto auto;
+    column-gap: 16px;
+    row-gap: 16px;
+
+    p {
+      margin: 0;
+      color: gray;
+
+      &:nth-child(odd) {
+        text-align: end;
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+.backButton,
+.deleteButton {
+  font-weight: bold;
+  padding: 8px;
+  border: none;
+  line-height: 14px;
+  border-radius: 2px;
+  box-shadow: 0 1px 2px rgba(38, 41, 44, 0.08);
+  background-color: var(--light-background-color);
+}
+
+.deleteButton {
+  color: white;
+  background-color: var(--remove-color);
+  margin-left: 8px;
 }
