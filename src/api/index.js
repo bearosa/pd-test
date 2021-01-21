@@ -19,6 +19,7 @@ const api = () => {
           method: 'GET',
           headers: getHeader()
         });
+        console.log(response)
       let persons = response.json();
       return persons;
     } catch (event) {
@@ -26,7 +27,7 @@ const api = () => {
     }
   };
 
-  const addPerson = async ({body}) => {
+  const addPerson = async (body) => {
     const path = "/persons"
 
     try {
@@ -35,7 +36,7 @@ const api = () => {
         {
           method: 'POST',
           headers: getHeader(),
-          body
+          body: JSON.stringify(body),
         });
       let person = response.json();
       return person;
@@ -61,10 +62,29 @@ const api = () => {
     }
   };
 
+  const addOrganization = async (body) => {
+    const path = "/organizations"
+
+    try {
+      let response = await fetch(
+        `${endpoint}${path}?api_token=${token}`,
+        {
+          method: 'POST',
+          headers: getHeader(),
+          body: JSON.stringify(body),
+        });
+      let person = response.json();
+      return person;
+    } catch (event) {
+      console.error(`There was a problem with addOrganization(): ${event.message}`);
+    }
+  };
+
   return {
     getPersonsList,
     addPerson,
-    deletePerson
+    deletePerson,
+    addOrganization
   }
 }
 

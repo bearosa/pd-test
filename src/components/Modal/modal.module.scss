@@ -4,16 +4,9 @@
   left: 0;
   height: 100%;
   width: 100%;
-  display: none;
-  opacity: 0;
   background-color: rgba(0, 0, 0, 0.5);
   transition: opacity 150ms;
   z-index: 99;
-
-  &.show {
-    display: block;
-    opacity: 1;
-  }
 
   .modal {
     position: fixed;

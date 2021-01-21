@@ -1,0 +1,51 @@
+.form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto auto auto auto auto;
+  grid-template-areas:
+    "nameInput nameInput"
+    "organizationInput organizationInput"
+    "locationInput locationInput"
+    "phoneInput phoneLabelInput"
+    "emailInput emailLabelInput"
+    "assistantInput assistantInput"
+    "groupsInput groupsInput";
+  column-gap: 16px;
+  row-gap: 16px;
+
+  .nameInput {
+    grid-area: nameInput;
+  }
+
+  .organizationInput {
+    grid-area: organizationInput;
+  }
+
+  .locationInput {
+    grid-area: locationInput;
+  }
+
+  .phoneInput {
+    grid-area: phoneInput;
+  }
+
+  .phoneLabelInput {
+    grid-area: phoneLabelInput;
+  }
+
+  .emailInput {
+    grid-area: emailInput;
+  }
+
+  .emailLabelInput {
+    grid-area: emailLabelInput;
+  }
+
+  .assistantInput {
+    grid-area: assistantInput;
+  }
+
+  .groupsInput {
+    grid-area: groupsInput;
+  }
+}
