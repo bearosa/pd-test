@@ -5,18 +5,18 @@ import close from "assets/close.svg";
 
 import st from "./modal.module.scss";
 
-const Modal = ({className, children, show, onClose, title, actions}) => {
+const Modal = ({className, children, onClose, title, actions, 'data-testid': dataTestId}) => {
   const handleClose = ev => {
     ev.stopPropagation();
     onClose();
   }
 
   return (
-    <div className={cls(st.overlay, {[st.show]: show})} onClick={handleClose}>
+    <div className={cls(st.overlay)} data-testid={dataTestId || "modal"}>
       <div className={cls(className, st.modal)}>
         <div className={st.titleContainer}>
           <p className={st.title}>{title}</p>
-          <button className={st.closeButton} onClick={handleClose}>
+          <button data-testid="close-button" className={st.closeButton} onClick={handleClose}>
             <img src={close} alt="close" className={st.closeIcon} />
           </button>
         </div>
@@ -28,6 +28,7 @@ const Modal = ({className, children, show, onClose, title, actions}) => {
 }
 
 Modal.defaultProps = {
+  'data-testid': undefined,
   className: undefined,
   children: <></>,
   show: false,
@@ -36,6 +37,7 @@ Modal.defaultProps = {
 };
 
 Modal.propTypes = {
+  'data-testid': PropTypes.string,
   className: PropTypes.string,
   children: PropTypes.node,
   show: PropTypes.bool,

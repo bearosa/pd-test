@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import Modal from './';
 
 const chance = require("chance").Chance();
@@ -35,3 +35,23 @@ test('renders actions', () => {
 
   expect(actionElement).toBeInTheDocument();
 });
+
+test('fires onClose', () => {
+  // Arrange
+  const handleClose = jest.fn()
+
+  // Act
+  const { getByTestId } = render(
+    <Modal onClose={handleClose}>
+      <div>test</div>
+    </Modal>
+  )
+  
+  expect(getByTestId('close-button')).toBeTruthy()
+
+  // Act
+  fireEvent.click(getByTestId('close-button'))
+
+  // Assert
+  expect(handleClose).toHaveBeenCalledTimes(1)
+})

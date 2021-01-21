@@ -1,12 +1,10 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import PeopleList from './';
 
 test('renders add button', () => {
   render(<PeopleList />);
-  const buttonElements = screen.getAllByText("Add person");
-  buttonElements.forEach(
-    el => expect(el).toBeInTheDocument()
-  )
+  const buttonElement = screen.getByTestId("add-button");
+  expect(buttonElement).toBeInTheDocument();
 });
 
 test('renders empty state', () => {
@@ -108,4 +106,22 @@ test('renders people', () => {
   render(<PeopleList people={people} />);
   const listElements = screen.getAllByTestId("list-element");
   expect(listElements.length).toEqual(people.length);
+});
+
+test('renders modal', () => {
+  const { getByTestId } = render(
+    <PeopleList />
+  );
+
+  //open add modal by clicking name
+  fireEvent.click(getByTestId("add-button")); 
+
+  let addModalElement = screen.getByTestId("add-modal");
+
+  expect(addModalElement).toBeInTheDocument();
+
+  //close add modal
+  fireEvent.click(getByTestId("close-button"));
+
+  expect(addModalElement).not.toBeInTheDocument();
 });

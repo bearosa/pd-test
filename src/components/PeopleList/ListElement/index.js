@@ -56,7 +56,7 @@ const ListElement = ({person, index, refetch, className}) => {
       setShowDeleteModal(true);
     }
     return (
-      <button onClick={handleOnClick} className={st.deleteButton}>
+      <button data-testid="info-modal-delete-button" onClick={handleOnClick} className={st.deleteButton}>
         delete person
       </button>
     )
@@ -80,10 +80,10 @@ const ListElement = ({person, index, refetch, className}) => {
     }
     return (
       <>
-        <button onClick={handleOnBack} className={st.backButton}>
+        <button data-testid="delete-modal-back-button"  onClick={handleOnBack} className={st.backButton}>
           back
         </button>
-        <button onClick={handleOnDelete} className={st.deleteButton}>
+        <button data-testid="delete-modal-delete-button" onClick={handleOnDelete} className={st.deleteButton}>
           delete person
         </button>
       </>
@@ -102,36 +102,41 @@ const ListElement = ({person, index, refetch, className}) => {
             {...provided.draggableProps}
             {...provided.dragHandleProps}>
             <div className={st.info}>
-              <p className={st.name} onClick={()=>setShowInfoModal(true)}>{person.name}</p>
+              <button data-testid="list-element-name" className={st.name} onClick={() => setShowInfoModal(true)}>{person.name}</button>
               <p className={st.organization}>
                 <img className={st.logo} src={organization} alt="organization" />
                 {person.org_name}
               </p>
             </div>
             <Avatar 
+              data-testid="avatar"
               className={st.avatar}
               pictures={person.picture_id?.pictures} 
               firstName={person.first_name} 
               lastName={person.last_name}
-              onClick={()=>setShowInfoModal(true)} />
+              onClick={() => setShowInfoModal(true)} />
           </div>
         )}
             
       </Draggable>
-      <Modal 
-        show={showInfoModal} 
-        onClose={()=>setShowInfoModal(false)} 
-        title="Person Information" 
-        actions={infoModalActions()}>
-        {infoModalContent()}
-      </Modal>
-      <Modal 
-        show={showDeleteModal} 
-        onClose={()=>setShowDeleteModal(false)} 
-        title="Delete Person" 
-        actions={deleteModalActions()}>
-        {deleteModalContent()}
-      </Modal>
+      {showInfoModal && 
+        <Modal 
+          data-testid="info-modal"
+          onClose={() => setShowInfoModal(false)} 
+          title="Person Information" 
+          actions={infoModalActions()}>
+          {infoModalContent()}
+        </Modal>
+      }
+      {showDeleteModal && 
+        <Modal 
+          data-testid="delete-modal"
+          onClose={() => setShowDeleteModal(false)} 
+          title="Delete Person" 
+          actions={deleteModalActions()}>
+          {deleteModalContent()}
+        </Modal>
+      }
     </>    
   )
 }
