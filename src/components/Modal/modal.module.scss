@@ -17,6 +17,8 @@
     display: flex;
     flex-direction: column;
     border: 1px solid var(--border-color);
+    max-width: calc(100% - 32px);
+    max-height: calc(100% - 32px);
 
     .titleContainer {
       background-color: var(--medium-background-color);
@@ -55,6 +57,9 @@
     .content {
       flex: 1;
       padding: 16px;
+      max-height: calc(100% - 100px); //modal height - title and actions height
+      overflow-y: auto;
+      min-width: 300px;
     }
 
     .actions {
