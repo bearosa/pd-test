@@ -8,7 +8,7 @@ const Avatar = ({className, pictures, firstName, lastName, ...props}) => {
     <div className={cls(className, st.avatar, {[st.noPhoto]: !pictures})} {...props} >
       {!!pictures ? 
           <picture>
-            <source media="(min-width: 512px)" srcSet={pictures[512]} />
+            <source media="(min-width: 128px)" srcSet={pictures[512]} />
             <img className={st.logo} src={pictures[128]} alt={firstName} />
           </picture>
         : 
