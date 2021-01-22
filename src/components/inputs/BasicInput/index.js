@@ -16,27 +16,18 @@ const BasicInput = forwardRef(({
   className,
   name
 }, ref) => {
+  //refs
   const compRef = useRef(null);
   const toValidate = useRef(false);
   const onChangeDebounce = useRef(debounce(onChange, 300));
 
+  //state
   const [value, setValue] = useState(propValue);
   const [isValid, setIsValid] = useState(true);
   
   const valid = validator ? isValid : propValid;
 
-  useEffect(() => {
-    if (validator && (!ref || toValidate.current)) {
-      const isLValid = validator(value);
-      setIsValid(isLValid);
-      if (isLValid) toValidate.current = false;
-    }
-  }, [ref, validator, value]);
-
-  const handleOnChange = ev => {
-    setValue(ev.target.value);
-  }
-  
+  //hooks
   useImperativeHandle(ref, () => ({
     validate: () => {
       let vf = false;
@@ -57,9 +48,23 @@ const BasicInput = forwardRef(({
   }));
 
   useEffect(() => {
+    if (validator && (!ref || toValidate.current)) {
+      const isLValid = validator(value);
+      setIsValid(isLValid);
+      if (isLValid) toValidate.current = false;
+    }
+  }, [ref, validator, value]);
+
+  useEffect(() => {
     onChangeDebounce.current(value);
   }, [onChange, value])
+
+  //handlers
+  const handleOnChange = ev => {
+    setValue(ev.target.value);
+  }
   
+  //render
   return (
     <div 
       className={cls(st.inputContainer, className, {[st.invalid]: !valid})}>

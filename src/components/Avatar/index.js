@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import st from "./avatar.module.scss";
 
 const Avatar = ({className, pictures, firstName, lastName, ...props}) => {
+  //render
   return (
     <div className={cls(className, st.avatar, {[st.noPhoto]: !pictures})} {...props} >
       {!!pictures ? 

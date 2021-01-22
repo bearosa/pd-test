@@ -8,10 +8,14 @@ import Loading from "components/Loading";
 import st from './app.module.scss';
 
 function App() {
+  //consts
   const limit = 1000;
+
+  //state
   const [loading, setLoading] = useState(false);
   const [people, setPeople] = useState([]);
 
+  //fetch
   const fetchPeople = () => {
     setLoading(true);
     api().getPersonsList({limit}).then(({data}) =>{
@@ -20,10 +24,12 @@ function App() {
     })
   }
 
+  //hooks
   useEffect(() => {
     fetchPeople();
   }, [])
 
+  //render
   return (
     <div className={st.app}>
       <header className={st.appHeader}>

@@ -12,11 +12,14 @@ import st from "./people-list.module.scss";
 import AddPersonForm from "components/forms/AddPersonForm";
 
 const PeopleList = ({people, setPeople, refetch, className}) => {
+  //refs
   const addForm = useRef(null);
 
+  //state
   const [showAddModal, setShowAddModal] = useState(false);
   const [personToAdd, setPersonToAdd] = useState({})
 
+  //drag&drop handlers
   const reorder = (list, startIndex, endIndex) => {
     const result = Array.from(list);
     const [removed] = result.splice(startIndex, 1);
@@ -43,6 +46,7 @@ const PeopleList = ({people, setPeople, refetch, className}) => {
     setPeople([...peopleReordered]);
   }
 
+  //handlers
   const handleChange = useCallback((person) => {
     setPersonToAdd(person);
   }, [])
@@ -63,11 +67,14 @@ const PeopleList = ({people, setPeople, refetch, className}) => {
     }
   }
 
+  //modal content and actions
   const modalContent = () => {
+    //render
     return <AddPersonForm ref={addForm} onChange={handleChange} />;
   }
 
   const modalActions = () => {
+    //render
     return (
       <button data-testid="add-modal-add-button" className={st.addButton} onClick={handleAddPerson}>
         Add person
@@ -75,6 +82,7 @@ const PeopleList = ({people, setPeople, refetch, className}) => {
     )
   }
 
+  //render
   return (
     <div className={cls(className, st.list)}>
       <button data-testid="add-button" className={st.addButton} onClick={() => setShowAddModal(true)}>

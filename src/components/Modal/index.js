@@ -6,11 +6,13 @@ import close from "assets/close.svg";
 import st from "./modal.module.scss";
 
 const Modal = ({className, children, onClose, title, actions, 'data-testid': dataTestId}) => {
+  //handlers
   const handleClose = ev => {
     ev.stopPropagation();
     onClose();
   }
 
+  //render
   return (
     <div className={cls(st.overlay)} data-testid={dataTestId || "modal"}>
       <div className={cls(className, st.modal)}>

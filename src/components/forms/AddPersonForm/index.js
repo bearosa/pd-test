@@ -7,9 +7,11 @@ import SelectInput from "components/inputs/SelectInput";
 import st from "./add-person-form.module.scss";
 
 const AddPersonForm = forwardRef(({ onChange }, ref) => {
+  //consts (custom fields)
   const assistant = "bff2c8b4ca9b3591be6f56b61108531ffcdb4a61";
   const groups = "b0cc020463afa8d79510c0f9c577b85163ce4a55";
 
+  //consts (options)
   const labelOptions = [
     "Work",
     "Home",
@@ -17,12 +19,14 @@ const AddPersonForm = forwardRef(({ onChange }, ref) => {
     "Other"
   ]
 
+  //refs
   const nameInputRef = useRef(null);
   const orgInputRef = useRef(null);
   const locationInputRef = useRef(null);
   const phoneInputRef = useRef(null);
   const emailInputRef = useRef(null);
 
+  //state
   const [name, setName] = useState("");
   const [organization, setOrganization] = useState("");
   const [location, setLocation] = useState("");
@@ -33,6 +37,7 @@ const AddPersonForm = forwardRef(({ onChange }, ref) => {
   const [assistantValue, setAssistantValue] = useState("");
   const [groupsValue, setGroupsValue] = useState("");
   
+  //hooks
   useImperativeHandle(ref, () => ({
     validate: () => {
       const validationArray = [
@@ -98,10 +103,12 @@ const AddPersonForm = forwardRef(({ onChange }, ref) => {
     ]
   )
 
+  //input validator
   const generalValidator = (value) => {
     return value !== "";
   };
 
+  //render
   return (
     <form className={st.form}>
       <BasicInput
@@ -175,11 +182,11 @@ const AddPersonForm = forwardRef(({ onChange }, ref) => {
 })
 
 AddPersonForm.defaultProps = {
-  onSubmit: () => {}
+  onChange: () => {}
 }
 
 AddPersonForm.propTypes = {
-  onSubmit: PropTypes.func
+  onChange: PropTypes.func
 }
 
 export default AddPersonForm;

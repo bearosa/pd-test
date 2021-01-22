@@ -11,13 +11,17 @@ import Modal from "components/Modal";
 import st from "./list-element.module.scss";
 
 const ListElement = ({person, index, refetch, className}) => {
+  //consts (custom fields)
   const assistant = "bff2c8b4ca9b3591be6f56b61108531ffcdb4a61";
   const groups = "b0cc020463afa8d79510c0f9c577b85163ce4a55";
 
+  //state
   const [showInfoModal, setShowInfoModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
+  //modals content and actions
   const infoModalContent = () => {
+    //render
     return (
       <div className={st.modalContent}>
         <Avatar className={st.modalAvatar}
@@ -51,10 +55,13 @@ const ListElement = ({person, index, refetch, className}) => {
   }
 
   const infoModalActions = () => {
+    //handlers
     const handleOnClick = () => {
       setShowInfoModal(false);
       setShowDeleteModal(true);
     }
+
+    //render
     return (
       <button data-testid="info-modal-delete-button" onClick={handleOnClick} className={st.deleteButton}>
         delete person
@@ -63,6 +70,7 @@ const ListElement = ({person, index, refetch, className}) => {
   }
 
   const deleteModalContent = () => {
+    //render
     return (
       <div className={st.modalContent}>
         You're about to delete <strong>{person.name}</strong>. Are you sure?
@@ -71,13 +79,17 @@ const ListElement = ({person, index, refetch, className}) => {
   }
 
   const deleteModalActions = () => {
+    //handlers
     const handleOnBack = () => {
       setShowDeleteModal(false);
       setShowInfoModal(true);
     }
+
     const handleOnDelete = () => {
       api().deletePerson({id: person.id}).then(() => refetch())
     }
+
+    //render
     return (
       <>
         <button data-testid="delete-modal-back-button"  onClick={handleOnBack} className={st.backButton}>
@@ -90,7 +102,7 @@ const ListElement = ({person, index, refetch, className}) => {
     )
   }
 
-
+  //render
   return (
     <>
       <Draggable draggableId={person.id.toString()} index={index}>

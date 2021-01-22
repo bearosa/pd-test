@@ -13,17 +13,23 @@ const SelectInput = ({
   className,
   name
 }) => {
-  const [value, setValue] = useState(propValue);
+  //refs
   const onChangeDebounce = useRef(debounce(onChange, 300));
 
-  const handleOnChange = ev => {
-    setValue(ev.target.value);
-  }
+  //state
+  const [value, setValue] = useState(propValue);
 
+  //hooks
   useEffect(() => {
     onChangeDebounce.current(value);
   }, [onChange, value])
 
+  //handlers
+  const handleOnChange = ev => {
+    setValue(ev.target.value);
+  }
+
+  //render
   return (
     <div className={cls(st.inputContainer, className)}>
       <label htmlFor={name}>{label}</label>
@@ -45,8 +51,9 @@ SelectInput.defaultProps = {
   onChange: () => {},
   value: undefined,
   label: undefined,
-  options: [undefined],
+  options: [],
   className: undefined,
+  name: undefined,
 };
 
 SelectInput.propTypes = {
@@ -55,6 +62,7 @@ SelectInput.propTypes = {
   label: PropTypes.string,
   options: PropTypes.array,
   className: PropTypes.string,
+  name: PropTypes.string,
 };
 
 export default memo(SelectInput, areEqual);
